@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Suspense>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );
