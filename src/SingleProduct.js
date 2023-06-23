@@ -8,6 +8,7 @@ import { Container } from "./styles/Container";
 import FormatPrice from "./helpers/FormatPrice";
 import { MdSecurity } from "react-icons/md";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
+import Star from "./components/Star";
 
 const API = process.env.REACT_APP_PRODUCT_API;
 
@@ -52,8 +53,7 @@ const SingleProduct = () => {
       {/* product dAta  */}
       <div className="product-data">
         <h2>{name}</h2>
-        <p>{stars}</p>
-        <p>{reviews} reviews</p>
+        <p><Star stars={stars} reviews={reviews} /></p>
         <p className="product-data-price">
           MRP:
           <del>
