@@ -29,6 +29,7 @@ const SingleProduct = () => {
     category,
     stock,
     stars,
+    image,
     reviews,
   } = singleProduct;
 
@@ -45,7 +46,7 @@ const SingleProduct = () => {
     <div className="grid grid-two-column">
       {/* product Images  */}
       <div className="product_images">
-        <MyImage  />
+        <MyImage imgs={image} />
       </div>
 
       {/* product dAta  */}
