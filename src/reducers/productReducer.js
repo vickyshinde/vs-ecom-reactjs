@@ -38,10 +38,16 @@ const ProductsReducer = (state, action) => {
         products: action.payload,
         featureProducts: featureData,
       };
+
+    case "SET_SINGLE_PRODUCT":
+      return {
+        ...state,
+        isLoading: false,
+        singleProduct: action.payload,
+      };
     default:
       return state;
   }
-
 };
 
 export default ProductsReducer;
