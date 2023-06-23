@@ -10,7 +10,7 @@ import reducer from "../reducers/productReducer";
 
 const AppContext = createContext();
 
-const API = "xxxx";
+const API = process.env.REACT_APP_PRODUCT_API;
 
 const initialState = {
   isLoading: false,
