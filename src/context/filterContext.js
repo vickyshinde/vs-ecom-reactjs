@@ -20,8 +20,13 @@ export const FilterContextProvider = ({ children }) => {
     dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
   }, [products]);
 
+  // to set the grid view
+  const setGridView = () => {
+    return dispatch({ type: "SET_GRID_VIEW" });
+  };
+
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider value={{ ...state, setGridView }}>
       {children}
     </FilterContext.Provider>
   );
