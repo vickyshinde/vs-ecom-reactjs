@@ -20,19 +20,21 @@ const filterReducer = (state, action) => {
       };
 
     case "GET_SORT_VALUE":
-      let userSortValue = document.getElementById("sort");
-      let sortValue = userSortValue.options[userSortValue.selectedIndex].value;
-      console.log(
-        "🚀 ~ file: filterReducer.js:25 ~ filterReducer ~ sortValue:",
-        sortValue
-      );
+      // let userSortValue = document.getElementById("sort");
+      // let sortValue = userSortValue.options[userSortValue.selectedIndex].value;
+      // console.log(
+      //   "🚀 ~ file: filterReducer.js:25 ~ filterReducer ~ sortValue:",
+      //   sortValue
+      // );
       return {
         ...state,
-        sorting_value: sortValue,
+        // sorting_value: sortValue,
+        sorting_value: action.payload,
       };
 
     case "SORTING_PRODUCTS":
-      let newSortProducts;
+      //traditional way
+      /* let newSortProducts;
       let tempSortProdcuts = [...action.payload];
 
       if (state.sorting_value === "lowest") {
@@ -59,7 +61,28 @@ const filterReducer = (state, action) => {
         newSortProducts = tempSortProdcuts.sort((a, b) => {
           return b.name.localeCompare(a.name);
         });
+      } */
+
+      let newSortProducts;
+      const { filter_products, sorting_value } = state;
+      let tempSortProdcuts = [...filter_products];
+
+      const sortingProducts = (a, b) => {
+        if (sorting_value === "lowest") {
+          return a.price - b.price;
+        }
+        if (sorting_value === "highest") {
+          return b.price - a.price;
+        }
+        if (sorting_value === "a-z") {
+          return a.name.localeCompare(b.name);
+        }
+        if (sorting_value === "z-a") {
+          return b.name.localeCompare(a.name);
+        }
       }
+
+      newSortProducts = tempSortProdcuts.sort(sortingProducts);
       return {
         ...state,
         filter_products: newSortProducts,
