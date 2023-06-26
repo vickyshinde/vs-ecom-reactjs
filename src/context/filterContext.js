@@ -26,13 +26,22 @@ export const FilterContextProvider = ({ children }) => {
   };
 
   // sorting function
-  const sorting = () => {
-    dispatch({ type: "GET_SORT_VALUE" });
+  //traditional way
+  // const sorting = () => {
+  //   dispatch({ type: "GET_SORT_VALUE" });
+  // };
+
+  const sorting = (event) => {
+    // console.log(event.target.value);
+    let userValue = event.target.value;
+    dispatch({ type: "GET_SORT_VALUE", payload: userValue });
   };
 
   // sort action
   useEffect(() => {
-    dispatch({ type: "SORTING_PRODUCTS", payload: products });
+    //traditional way
+    // dispatch({ type: "SORTING_PRODUCTS", payload: products });
+    dispatch({ type: "SORTING_PRODUCTS" });
   }, [state.sorting_value]);
 
   useEffect(() => {
