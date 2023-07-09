@@ -20,7 +20,15 @@ const FilterSection = () => {
 
   // NEED UNIQUE DATA
   const categoryOnlyData = getUniqueData(all_products, "category");
-  console.log("🚀 ~ file: FilterSection.js:25 ~ FilterSection ~ categoryOnlyData:", categoryOnlyData)
+  const companyData = getUniqueData(all_products, "company");
+  console.log(
+    "🚀 ~ file: FilterSection.js:24 ~ FilterSection ~ companyData:",
+    companyData
+  );
+  console.log(
+    "🚀 ~ file: FilterSection.js:25 ~ FilterSection ~ categoryOnlyData:",
+    categoryOnlyData
+  );
 
   return (
     <Wrapper>
@@ -53,6 +61,26 @@ const FilterSection = () => {
             );
           })}
         </div>
+      </div>
+      <div className="filter-company">
+        <h3>Company</h3>
+
+        <form action="#">
+          <select
+            name="company"
+            id="company"
+            className="filter-company--select"
+            onClick={updateFilterValue}
+          >
+            {companyData.map((curElem, index) => {
+              return (
+                <option key={index} value={curElem} name="company">
+                  {curElem}
+                </option>
+              );
+            })}
+          </select>
+        </form>
       </div>
     </Wrapper>
   );
