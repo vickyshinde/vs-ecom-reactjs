@@ -3,7 +3,7 @@ import { useFilterContext } from "../context/filterContext";
 
 const FilterSection = () => {
   const {
-    filters: { text, category },
+    filters: { text, category, color },
     all_products,
     updateFilterValue,
   } = useFilterContext();
@@ -15,20 +15,29 @@ const FilterSection = () => {
       return curElem[key];
     });
 
+    if (key === "colors") {
+      // return newVal = ["all", ...new Set([].concat(...newVal))];
+      newVal = newVal.flat();
+    }
     return (newVal = ["all", ...new Set(newVal)]);
   };
 
   // NEED UNIQUE DATA
   const categoryOnlyData = getUniqueData(all_products, "category");
   const companyData = getUniqueData(all_products, "company");
-  console.log(
-    "🚀 ~ file: FilterSection.js:24 ~ FilterSection ~ companyData:",
-    companyData
-  );
-  console.log(
-    "🚀 ~ file: FilterSection.js:25 ~ FilterSection ~ categoryOnlyData:",
-    categoryOnlyData
-  );
+  const colorsData = getUniqueData(all_products, "colors");
+  // console.log(
+  //   "🚀 ~ file: FilterSection.js:25 ~ FilterSection ~ colorsData:",
+  //   colorsData
+  // );
+  // console.log(
+  //   "🚀 ~ file: FilterSection.js:24 ~ FilterSection ~ companyData:",
+  //   companyData
+  // );
+  // console.log(
+  //   "🚀 ~ file: FilterSection.js:25 ~ FilterSection ~ categoryOnlyData:",
+  //   categoryOnlyData
+  // );
 
   return (
     <Wrapper>
@@ -81,6 +90,27 @@ const FilterSection = () => {
             })}
           </select>
         </form>
+      </div>
+      <div className="filter-colors colors">
+        <h3>Colors</h3>
+
+        <div className="filter-color-style">
+          {colorsData.map((curColor, index) => {
+            return (
+              <button
+                key={index}
+                type="button"
+                value={curColor}
+                name="color"
+                style={{ backgroundColor: curColor }}
+                className="btnStyle"
+                onClick={updateFilterValue}
+              >
+                {color === curColor ? "" : null}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </Wrapper>
   );
