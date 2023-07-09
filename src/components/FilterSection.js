@@ -4,8 +4,24 @@ import { useFilterContext } from "../context/filterContext";
 const FilterSection = () => {
   const {
     filters: { text },
+    all_products,
     updateFilterValue,
   } = useFilterContext();
+
+  // GET THE UNIQUE DATA OF EACH KEY
+
+  const getUniqueData = (data, key) => {
+    let newVal = data.map((curElem) => {
+      return curElem[key];
+    });
+
+    newVal = ['All', ...new Set(newVal)];
+
+    console.log("🚀 ~ file: FilterSection.js:17 ~ newVal ~ newVal:", newVal);
+  };
+
+  // NEED UNIQUE DATA
+  const categoryOnlyData = getUniqueData(all_products, "category");
 
   return (
     <Wrapper>
