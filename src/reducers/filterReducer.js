@@ -80,12 +80,41 @@ const filterReducer = (state, action) => {
         if (sorting_value === "z-a") {
           return b.name.localeCompare(a.name);
         }
-      }
+      };
 
       newSortProducts = tempSortProdcuts.sort(sortingProducts);
       return {
         ...state,
         filter_products: newSortProducts,
+      };
+
+    case "UPDATE_FILTERS_VALUE":
+      const { name, value } = action.payload;
+
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
+      };
+
+    case "FILTER_PRODUCTS":
+      let { all_products } = state;
+      let tempFilterProduct = [...all_products];
+
+      const { text } = state.filters;
+
+      if (text) {
+        tempFilterProduct = tempFilterProduct.filter((curElem) => {
+          // return curElem.name.toLowerCase().startsWith(text);
+          return curElem.name.toLowerCase().includes(text);
+        });
+      }
+
+      return {
+        ...state,
+        filter_products: tempFilterProduct,
       };
 
     default:
