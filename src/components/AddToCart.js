@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
-import CartAmountToggle from "./CartAmountToggle.js";
+import CartQuantityToggle from "./CartQuantityToggle.js";
 import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
 
@@ -9,14 +9,14 @@ const AddToCart = ({ product }) => {
   const { id, colors, stock } = product;
 
   const [color, setColor] = useState(colors[0]);
-  const [amount, setAmount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   const setDecrease = () => {
-    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+    quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
   };
 
   const setIncrease = () => {
-    amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    quantity < stock ? setQuantity(quantity + 1) : setQuantity(stock);
   };
 
   return (
@@ -30,7 +30,8 @@ const AddToCart = ({ product }) => {
                 key={index}
                 style={{ backgroundColor: curColor }}
                 className={color === curColor ? "btnStyle active" : "btnStyle"}
-                onClick={() => setColor(curColor)}>
+                onClick={() => setColor(curColor)}
+              >
                 {color === curColor ? <FaCheck className="checkStyle" /> : null}
               </button>
             );
@@ -39,13 +40,16 @@ const AddToCart = ({ product }) => {
       </div>
 
       {/* add to cart  */}
-      <CartAmountToggle
-        amount={amount}
+      <CartQuantityToggle
+        quantity={quantity}
         setDecrease={setDecrease}
         setIncrease={setIncrease}
       />
 
-      <NavLink to="/cart">
+      <NavLink
+        to="/cart"
+        onClick={() => addToCart(id, color, quantity, product)}
+      >
         <Button className="btn">Add To Cart</Button>
       </NavLink>
     </Wrapper>
